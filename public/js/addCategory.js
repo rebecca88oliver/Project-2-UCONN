@@ -24,7 +24,7 @@ $("#addCategory").on("click", event => {
 $.get("/api/all", data => {
   if (data.length !== 0) {
     const categories = Object.keys(data);
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < categories.length; i++) {
       const row = $("<div>");
       row.addClass("category");
 

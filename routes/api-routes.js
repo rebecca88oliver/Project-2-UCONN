@@ -16,9 +16,7 @@ module.exports = function(app) {
       res.json(result);
     });
   });
-};
 
-module.exports = function(app) {
   // Search for Specific item (or all items) then provides JSON
   app.get("/api/:items?", (req, res) => {
     if (req.params.items) {
@@ -34,7 +32,7 @@ module.exports = function(app) {
           return res.json(result);
         });
     } else {
-      item.findAll().then(result => {
+      items.findAll().then(result => {
         return res.json(result);
       });
     }
@@ -60,33 +58,44 @@ module.exports = function(app) {
       }
     );
   });
+
+  app.post("/api/edit", (req, res) => {
+    console.log("item Data:");
+    console.log(req.body);
+    item.update(req.body[1], {
+      where: {
+        id: req.body[0].id
+      }
+    });
+  });
+
+  app.post("/api/newCat", (req, res) => {
+    console.log("New Category:");
+    console.log(req.body);
+
+    const dbQuery = "ALTER TABLE items ADD COLUMN ? VARCHAR(15);";
+
+    connection.query(dbQuery, req.body, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      console.log("Category was entered into database!");
+      res.end();
+    });
+  });
+
+  app.post("/api/delCat", (req, res) => {
+    console.log("Deleted Category:");
+    console.log(req.body);
+
+    const dbQuery = "ALTER TABLE items DROP COLUMN ?;";
+
+    connection.query(dbQuery, req.body, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      console.log("Category was deleted from database!");
+      res.end();
+    });
+  });
 };
-app.post("/api/newCat", (req, res) => {
-  console.log("New Category:");
-  console.log(req.body);
-
-  const dbQuery = "ALTER TABLE items ADD COLUMN ? VARCHAR(15);";
-
-  connection.query(dbQuery, req.body, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log("Category was entered into database!");
-    res.end();
-  });
-});
-
-app.post("/api/delCat", (req, res) => {
-  console.log("Deleted Category:");
-  console.log(req.body);
-
-  const dbQuery = "ALTER TABLE items DROP COLUMN ?;";
-
-  connection.query(dbQuery, req.body, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log("Category was deleted from database!");
-    res.end();
-  });
-});
