@@ -12,7 +12,7 @@ form.login {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    background: #6f6565;
 }
 
 p {
@@ -31,7 +31,7 @@ a, a:hover, a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: rgb(117, 89, 89);
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -66,7 +66,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #565e80;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -79,7 +79,7 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #565e80;
 }
 
 #sidebar ul.components {
@@ -98,13 +98,13 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #565e80;
     background: #fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #565e80;
 }
 
 
@@ -123,7 +123,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #565e80;
 }
 
 ul.CTAs {
@@ -140,11 +140,11 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #7386D5;
+    color: #565e80;
 }
 
 a.article, a.article:hover {
-    background: #6d7fcc !important;
+    background: #565e80 !important;
     color: #fff !important;
 }
 
@@ -243,7 +243,7 @@ a.article, a.article:hover {
   margin: 0 15px;
 }
 .nav a:hover {
-  color: #f1f1f1;
+  color: #5e2e2e;
 }
 
 
