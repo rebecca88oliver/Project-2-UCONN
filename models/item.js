@@ -3,7 +3,9 @@ var Sequelize = require("sequelize");
 var sequelize = require("../config/connection.js");
 
 
-module.exports = sequelize.define("Item", {
+
+module.exports = (sequelize, DataTypes) => {
+    const Item = Sequelize.define("Item", {
     itemName: {
       type: Sequelize.STRING(50),
       allowNull: false,
@@ -36,4 +38,4 @@ module.exports = sequelize.define("Item", {
 });
 
 return Item;
-
+};
