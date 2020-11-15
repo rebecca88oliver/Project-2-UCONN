@@ -1,5 +1,7 @@
-const Sequelize = require("sequelize");
-const { all } = require("sequelize/types/lib/operators");
+var Sequelize = require("sequelize");
+// sequelize (lowercase) references our connection to the DB.
+var sequelize = require("../config/connection.js");
+
 
 module.exports = sequelize.define("Item", {
     itemName: {

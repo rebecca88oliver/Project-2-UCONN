@@ -16,7 +16,6 @@ module.exports = function(app) {
     });
   });
 
-  module.exports = function(app) {
     // Search for Specific item (or all items) then provides JSON
     app.get("/api/:items?", function(req, res) {
       if (req.params.items) {
@@ -36,9 +35,6 @@ module.exports = function(app) {
       }
     });
   
-
-
-
   // Add a item
   app.post("/api/new", function(req, res) {
     console.log("item Data:");
