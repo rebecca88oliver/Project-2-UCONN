@@ -1,7 +1,11 @@
-const Sequelize = require("sequelize");
-const { all } = require("sequelize/types/lib/operators");
+var Sequelize = require("sequelize");
+// sequelize (lowercase) references our connection to the DB.
+var sequelize = require("../config/connection.js");
 
-module.exports = sequelize.define("Item", {
+
+
+module.exports = (sequelize, DataTypes) => {
+    const Item = Sequelize.define("Item", {
     itemName: {
       type: Sequelize.STRING(50),
       allowNull: false,
@@ -34,4 +38,4 @@ module.exports = sequelize.define("Item", {
 });
 
 return Item;
-
+};

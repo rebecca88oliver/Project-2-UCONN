@@ -1,13 +1,18 @@
-const express = require ("express");
-const app = express();
-const db = require('./models');
-const PORT = process.env.PORT || 3000;
+// Dependencies
+var Sequelize = require("sequelize");
 
-app.use(express.urlencoded({ extended: true}));
-app.use(express.json());
+// Creates mySQL connection using Sequelize, the empty string in the third argument spot is our password.
+var sequelize = new Sequelize("custom_db", "root", "", {
+  host: "localhost",
+  port: 3306,
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
+});
 
-db.sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(`listening at: http://localhost:${PORT}`);
-    });
-    });
+// Exports the connection for other files to use
+module.exports = sequelize;
+console.log("listening on port 3306");
