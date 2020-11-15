@@ -1,3 +1,4 @@
+
 'use strict';
 
 window.chartColors = {
@@ -139,3 +140,4 @@ window.chartColors = {
 	Samples.utils.srand(Date.now());
 
 }(this));
+
