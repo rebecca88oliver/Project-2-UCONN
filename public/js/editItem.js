@@ -1,15 +1,16 @@
 let oldItem;
+let categories;
 $("#updateItem").on("click", event => {
   event.preventDefault();
 
   // Make an array of the input values
-  for (let i = 0; i < data.length; i++) {
-    const newItem = [];
-    newItem.push(
-      $(".category" + [i])
-        .val()
-        .trim()
-    );
+  for (let i = 0; i < categories.length; i++) {
+    const newItem = {};
+    const key = categories[i];
+    const value = $(".category" + [i])
+      .val()
+      .trim();
+    newItem[key] = value;
   }
   console.log(newItem);
   // Send an AJAX POST-request with jQuery
@@ -21,13 +22,23 @@ $("#updateItem").on("click", event => {
     });
 });
 
-// When the form loads, grab all of our categories ane item values
-$.get("/api/all", data => {
+$("#deleteItem").on("click", event => {
+  event.preventDefault();
+  // Send an AJAX POST-request with jQuery
+  $.post("/api/delete", oldItem)
+    // On success, run the following code
+    .then(() => {
+      //close window
+      $("input").val("");
+    });
+});
+
+// When the form loads, grab our categories and item values
+$.get("/api/" + oldItem, data => {
   if (data.length !== 0) {
     oldItem = data;
-    const categories = Object.keys(data);
-    const currCategory = categories[i];
-    for (let i = 0; i < data.length; i++) {
+    categories = Object.keys(data);
+    for (let i = 0; i < categories.length; i++) {
       const row = $("<div class='form-group'>");
       row.append(
         "<label for='category" +
