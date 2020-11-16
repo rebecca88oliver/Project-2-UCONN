@@ -1,8 +1,10 @@
 // Dependencies
 var Sequelize = require("sequelize");
+var express = require('express');
+var app = express();
 
 // Creates mySQL connection using Sequelize, the empty string in the third argument spot is our password.
-var sequelize = new Sequelize("custom_db", "root", "", {
+var sequelize = new Sequelize("custom_db", "root", "p0w3r", {
   host: "localhost",
   port: 3306,
   dialect: "mysql",
@@ -15,4 +17,3 @@ var sequelize = new Sequelize("custom_db", "root", "", {
 
 // Exports the connection for other files to use
 module.exports = sequelize;
-console.log("listening on port 3306");
