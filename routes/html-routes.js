@@ -1,3 +1,4 @@
+
 // *********************************************************************************
 // html-routes.js - this file offers a set of routes for sending users to the various html pages
 // *********************************************************************************
@@ -11,24 +12,44 @@ var path = require("path");
 // =============================================================
 module.exports = function(app) {
 
-  // Each of the below routes just handles the HTML page that the user gets sent to.
-
-  // index route loads home.html
-  app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/home.html"));
+  
+  app.get("/", (req, res) => {
+    res.render('dashboard')
   });
 
-  // add route loads the additem.html page,
-  // where users can enter new items to the db
-  app.get("/add", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/additem.html"));
+  app.get("/createInventory", (req, res) => {
+    res.render('createInventory')
   });
 
-  // all route loads the all.html page,
-  // where all characters in the db are displayed
-  app.get("/all", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/all.html"));
+  app.get("/addCategory", (req, res) => {
+    res.render('addCategory')
   });
+
+  app.get("/editCategory", (req, res) => {
+    res.render('editCategory')
+  });
+
+  app.get("/deleteCategory", (req, res) => {
+    res.render('deleteCategory')
+  });
+
+ 
+  app.get("/changeCategoryOrder", (req, res) => {
+    res.render('changeCategoryOrder')
+  });
+
+  app.get("/createProduct", (req, res) => {
+    res.render('createProduct')
+  });
+
+  app.get("/fullInventory", (req, res) => {
+    res.render('fullInventory')
+  });
+
+  app.get("/productList", (req, res) => {
+    res.render('productList')
+  });
+  
 
 };
 
