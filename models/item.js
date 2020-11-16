@@ -1,9 +1,12 @@
+// Dependencies
+//////////////////////////////////////////////
 var Sequelize = require("sequelize");
 // sequelize (lowercase) references our connection to the DB.
 var sequelize = require("../config/connection.js");
+var inquirer = requre("inquirer");
 
-
-
+//Database code
+//////////////////////////////////////////////
 module.exports = (sequelize, DataTypes) => {
     const Item = Sequelize.define("Item", {
     itemName: {
@@ -39,3 +42,4 @@ module.exports = (sequelize, DataTypes) => {
 
 return Item;
 };
+
