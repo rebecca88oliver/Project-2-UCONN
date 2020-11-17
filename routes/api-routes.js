@@ -1,51 +1,77 @@
-
 // Dependencies
 // =============================================================
-var connection = require("../config/connection.js");
+const connection = require("../config/connection.js");
+const { Sequelize } = require("../models/index.js");
+const items = require("../models/thedata.js");
 
 // Routes
 // =============================================================
 module.exports = function(app) {
   // Get all items
-  app.get("/api/all", function(req, res) {
-    var dbQuery = "SELECT * FROM items";
+  app.get("/api/all", (req, res) => {
+    const dbQuery = "SELECT * FROM items";
 
-    connection.query(dbQuery, function(err, result) {
-      if (err) throw err;
+    connection.query(dbQuery, (err, result) => {
+      if (err) {
+        throw err;
+      }
       res.json(result);
     });
   });
 
-    // Search for Specific item (or all items) then provides JSON
-    app.get("/api/:items?", function(req, res) {
-      if (req.params.items) {
-        // Display the JSON for ONLY that item.
-        // (Note how we're using the ORM here to run our searches)
-        item.findOne({
-          where: {
-            routeName: req.params.items
-          }
-        }).then(function(result) {
-          return res.json(result);
-        });
-      } else {
-        item.findAll().then(function(result) {
-          return res.json(result);
-        });
-      }
-    });
-  
+  // Search for Specific item (or all items) then provides JSON
+  app.get("/api/:item", (req, res) => {
+    items
+      .findAll({
+        where: {
+          itemName: req.params.item
+        }
+      })
+      .then(results => {
+        res.json(results);
+      });
+  });
+
   // Add a item
-  app.post("/api/new", function(req, res) {
+  app.post("/api/new", (req, res) => {
+    console.log("Item Data:");
+    console.log(req.body);
+    items.create(req.body).then(results => {
+      res.json(results);
+    });
+  });
+
+  app.post("/api/edit", (req, res) => {
     console.log("item Data:");
     console.log(req.body);
-
-    var dbQuery = "INSERT INTO items (itemName, baseCost, retailPrice, itemQuantity, itemDescription, needsRestock, retailProfit) VALUES (?,?,?,?,?,?,?)";
-
-    connection.query(dbQuery, [req.body.author, req.body.body, req.body.created_at], function(err, result) {
-      if (err) throw err;
-      console.log("item was entered into database!");
-      res.end();
+    items.update(req.body[1], {
+      where: {
+        id: req.body[0].id
+      }
     });
+  });
+
+  app.post("/api/delete", (req, res) => {
+    console.log("item Data:");
+    console.log(req.body);
+    items.destroy({
+      where: {
+        id: req.body[0].id
+      }
+    });
+  });
+
+  app.post("/api/newCat", (req, res) => {
+    console.log("New Category:");
+    console.log(req.body);
+
+    items.addColumn("items", req.body, Sequelize.VARCHAR);
+  });
+
+  app.post("/api/delCat", (req, res) => {
+    console.log("Deleted Category:");
+    console.log(req.body);
+
+    items.removeColumn("items", req.body);
   });
 };
