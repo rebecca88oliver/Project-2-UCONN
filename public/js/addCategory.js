@@ -14,10 +14,8 @@ $("#addCategory").on("click", event => {
     // On success, run the following code
     .then(() => {
       //display new category
+      window.location.href = "/";
     });
-
-  // Empty each input box by replacing the value with an empty string
-  $("#newCategory").val("");
 });
 
 // When the page loads, grab all of our categories
@@ -30,7 +28,7 @@ $.get("/api/all", data => {
 
       row.append("<p>" + categories[i] + "</p>");
 
-      $("#categoryArea").apppend(row);
+      $("#categoryArea").append(row);
     }
   }
 });

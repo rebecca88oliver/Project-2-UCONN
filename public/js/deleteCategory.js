@@ -30,7 +30,7 @@ $.get("/api/all", data => {
 
       row.append("<p>" + categories[i] + "</p>");
 
-      $("#categoryArea").apppend(row);
+      $("#categoryArea").append(row);
     }
   }
 });

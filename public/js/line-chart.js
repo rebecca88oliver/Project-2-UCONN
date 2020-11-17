@@ -68,6 +68,5 @@ var lineConfig = {
 
 (function () {
     var ctx = document.getElementById('chart').getContext('2d');
-    debugger;
     window.chart = new Chart(ctx, lineConfig);
 })();
