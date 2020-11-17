@@ -1,8 +1,8 @@
 // Dependencies
 // =============================================================
-const connection = require("../config/connection.js");
+const connection = require("../config/config.json");
 const { Sequelize } = require("../models/index.js");
-const items = require("../models/thedata.js");
+const items = require("../models/item.js");
 
 // Routes
 // =============================================================
