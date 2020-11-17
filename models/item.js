@@ -2,8 +2,8 @@
 //////////////////////////////////////////////
 var Sequelize = require("sequelize");
 // sequelize (lowercase) references our connection to the DB.
-var sequelize = requre("../config/connection.js");
-var inquirer = requre("inquirer");
+var sequelize = require("../config/connection.js");
+var inquirer = require("inquirer");
 
 //Database code
 //////////////////////////////////////////////
