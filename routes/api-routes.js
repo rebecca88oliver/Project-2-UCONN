@@ -9,13 +9,8 @@ const items = require("../models/item.js");
 module.exports = function(app) {
   // Get all items
   app.get("/api/all", (req, res) => {
-    const dbQuery = "SELECT * FROM items";
-
-    connection.query(dbQuery, (err, result) => {
-      if (err) {
-        throw err;
-      }
-      res.json(result);
+    items.findAll().then(results => {
+      res.json(results);
     });
   });
 
