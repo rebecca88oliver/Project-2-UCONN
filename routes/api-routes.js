@@ -70,4 +70,10 @@ module.exports = function(app) {
 
     db.Item.removeColumn("items", req.body);
   });
+  app.post("/api/editCat", (req, res) => {
+    console.log("Category:");
+    console.log(req.body);
+
+    db.Item.renameColumn("items", req.body[0], req.body[1]);
+  });
 };

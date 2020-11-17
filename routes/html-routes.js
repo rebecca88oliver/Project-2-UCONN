@@ -21,12 +21,12 @@ module.exports = function(app) {
     res.render("addCategory");
   });
 
-  app.get("/editCategory", (req, res) => {
-    res.render("editCategory");
+  app.get("/editItem", (req, res) => {
+    res.render("editItem");
   });
 
-  app.get("/deleteCategory", (req, res) => {
-    res.render("deleteCategory");
+  app.get("/editCategory", (req, res) => {
+    res.render("editCategory");
   });
 
   app.get("/changeCategoryOrder", (req, res) => {
