@@ -2,7 +2,7 @@
 //////////////////////////////////////////////
 var Sequelize = require("sequelize");
 // sequelize (lowercase) references our connection to the DB.
-var sequelize = require("../config/connection.js");
+var sequelize = require("server.js");
 var inquirer = requre("inquirer");
 
 //Database code
@@ -42,4 +42,3 @@ module.exports = (sequelize, DataTypes) => {
 
 return Item;
 };
-

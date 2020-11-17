@@ -1,5 +1,6 @@
 'use strict';
 var inquirer = require("inquirer");
+const item = require("./item");
 
 ///Main Menu
 //////////////////////////////////////////////
@@ -43,19 +44,10 @@ var newItem = [
       }
 ];
 
-inquirer.prompt(newItem).then(res => {
-    connection.query("SELECT * FROM items", (err, data) => {
-        console.table(data);
-        askQuestions();
-});
-});
-
-
-
-//Console Log it/ Replace with export to html page.     
+//Exports the answers to the database.   
 inquirer.prompt(questions).then(res => {
     connection.query(
-      "INSERT INTO employee (productName, productInfo, retailPrice, baseCost) VALUES (?, ?, ?, ?)",
+      "INSERT INTO items (productName, productInfo, retailPrice, baseCost) VALUES (?, ?, ?, ?)",
       [res.productName, res.productInfo, res.retailPrice, res.baseCost],
       err => {
         if (err) {
@@ -66,3 +58,48 @@ inquirer.prompt(questions).then(res => {
       }
     )}
 );
+
+
+//Deleting an Item from the Database
+////////////////////////////////////////////////////
+
+//promt to enter name for deletion
+var whatDelete = [{
+  type: "input",
+  name: "whatDelete",
+  message: "Please enter the exact name of the product you would like to delete"
+}];
+
+inquirer.prompt(whatDelete).then(
+//Deletes the item
+function (req,res) {    
+  model.destroy({
+      where: {
+          itemName: req.params.itemName
+      }
+  })
+//Reports success or failure
+  .then(function (deletedRecord) {
+      if(deletedRecord === 1){
+          res.status(200).json({message:"Deleted successfully"});          
+      }
+      else
+      {
+          res.status(404).json({message:"record not found"})
+      }
+  })
+  .catch(function (error){
+      res.status(500).json(error);
+  });
+});
+
+
+
+//Changing an item attribute
+////////////////////////////////////////////////////
+const objectToUpdate = {
+  title: 'Hello World',
+  description: 'Hello World'
+  }
+  
+  models.Locale.update(objectToUpdate, { where: { id: 2}})
