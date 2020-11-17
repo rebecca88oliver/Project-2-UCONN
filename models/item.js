@@ -7,35 +7,13 @@ const Sequelize = require("sequelize");
 //////////////////////////////////////////////
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define("Item", {
-    itemName: {
-      type: sequelize.STRING(50),
-      allowNull: false,
-      primaryKey: true
-    },
-    baseCost: {
-      type: sequelize.INTEGER,
-      allowNull: false
-    },
-    retailPrice: {
-      type: sequelize.INTEGER,
-      allowNull: false
-    },
-    itemQuantity: {
-      type: sequelize.INTEGER,
-      allowNull: true
-    },
-    itemDescription: {
-      type: sequelize.STRING(500),
-      allowNull: true
-    },
-    needsRestock: {
-      type: sequelize.BOOLEAN,
-      default: false
-    },
-    retailProfit: {
-      type: sequelize.INTEGER,
-      allowNull: false
-    }
+    itemName: DataTypes.STRING,
+    baseCost: DataTypes.INTEGER,
+    retailPrice: DataTypes.INTEGER,
+    itemQuantity: DataTypes.INTEGER,
+    itemDescription: DataTypes.STRING,
+    needsRestock: DataTypes.BOOLEAN,
+    retailProfit: DataTypes.INTEGER
   });
 
   return Item;

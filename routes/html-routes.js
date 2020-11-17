@@ -1,56 +1,47 @@
-
 // *********************************************************************************
 // html-routes.js - this file offers a set of routes for sending users to the various html pages
 // *********************************************************************************
 
 // Dependencies
 // =============================================================
-var path = require("path");
-
+const path = require("path");
 
 // Routes
 // =============================================================
 module.exports = function(app) {
-
-  
   app.get("/", (req, res) => {
-    res.render('dashboard')
+    res.render("dashboard");
   });
 
   app.get("/createInventory", (req, res) => {
-    res.render('createInventory')
+    res.render("createInventory");
   });
 
   app.get("/addCategory", (req, res) => {
-    res.render('addCategory')
+    res.render("addCategory");
   });
 
   app.get("/editCategory", (req, res) => {
-    res.render('editCategory')
+    res.render("editCategory");
   });
 
   app.get("/deleteCategory", (req, res) => {
-    res.render('deleteCategory')
+    res.render("deleteCategory");
   });
 
- 
   app.get("/changeCategoryOrder", (req, res) => {
-    res.render('changeCategoryOrder')
+    res.render("changeCategoryOrder");
   });
 
   app.get("/createProduct", (req, res) => {
-    res.render('createProduct')
+    res.render("createProduct");
   });
 
   app.get("/fullInventory", (req, res) => {
-    res.render('fullInventory')
+    res.render("fullInventory");
   });
 
   app.get("/productList", (req, res) => {
-    res.render('productList')
+    res.render("productList");
   });
-  
-
 };
-
-
