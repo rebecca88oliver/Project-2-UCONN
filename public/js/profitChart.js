@@ -1,4 +1,4 @@
-const botLabel = [];
+const botLabel2 = [];
 const costs = [];
 const prices = [];
 const profits = [];
@@ -6,53 +6,52 @@ const profits = [];
 $.get("/api/all", data => {
   if (data.length !== 0) {
     for (let i = 0; i < data.length; i++) {
-      botLabel[i] = data[i].itemName;
+      botLabel2[i] = data[i].itemName;
       costs[i] = data[i].baseCost;
       prices[i] = data[i].retailPrice;
-      profits[i] = prices[i] - costs[i];
+      profits[i] = parseInt(prices[i]) - parseInt(costs[i]);
     }
   }
-});
 
-const color = Chart.helpers.color;
-const barChartData = {
-  labels: botLabel,
-  datasets: [
-    {
-      label: "Wholesale Cost",
-      backgroundColor: color(window.chartColors.red)
-        .alpha(0.5)
-        .rgbString(),
-      borderColor: window.chartColors.red,
-      borderWidth: 1,
-      data: costs
-    },
-    {
-      label: "Retail Price",
-      backgroundColor: color(window.chartColors.blue)
-        .alpha(0.5)
-        .rgbString(),
-      borderColor: window.chartColors.blue,
-      borderWidth: 1,
-      data: prices
-    },
-    {
-      label: "Profit",
-      backgroundColor: color(window.chartColors.green)
-        .alpha(0.5)
-        .rgbString(),
-      borderColor: window.chartColors.green,
-      borderWidth: 1,
-      data: profits
-    }
-  ]
-};
+  console.log(profits);
+  const color = Chart.helpers.color;
+  const barChartData2 = {
+    labels: botLabel2,
+    datasets: [
+      {
+        label: "Wholesale Cost",
+        backgroundColor: color(window.chartColors.red)
+          .alpha(0.5)
+          .rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: Object.values(costs)
+      },
+      {
+        label: "Retail Price",
+        backgroundColor: color(window.chartColors.blue)
+          .alpha(0.5)
+          .rgbString(),
+        borderColor: window.chartColors.blue,
+        borderWidth: 1,
+        data: Object.values(prices)
+      },
+      {
+        label: "Profit",
+        backgroundColor: color(window.chartColors.green)
+          .alpha(0.5)
+          .rgbString(),
+        borderColor: window.chartColors.green,
+        borderWidth: 1,
+        data: Object.values(profits)
+      }
+    ]
+  };
 
-(function() {
   const ctx = document.getElementById("profitChart").getContext("2d");
   window.profitChart = new Chart(ctx, {
     type: "bar",
-    data: barChartData,
+    data: barChartData2,
     options: {
       responsive: true,
       legend: {
@@ -75,4 +74,4 @@ const barChartData = {
       }
     }
   });
-})();
+});

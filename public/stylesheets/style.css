@@ -265,7 +265,7 @@ a.article, a.article:hover {
 }
 
 .activity-inner {
-    background-color: white;
+    background-color: rgb(138, 0, 0);
     display: flex;
     flex-direction: column;
     justify-content: center;
