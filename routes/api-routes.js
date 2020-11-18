@@ -50,11 +50,9 @@ module.exports = function(app) {
       if (Object.keys(req.body).length > 4) {
         for (let i = 4; i < Object.keys(req.body).length; i++) {
           sequelize.query(
-            "UPDATE Items SET " +
-              Object.keys(req.body)[i] +
-              "=? WHERE itemName=?;",
+            "UPDATE Items SET " + Object.keys(req.body)[i] + "=? WHERE Name=?;",
             {
-              replacements: [Object.values(req.body)[i], req.body.itemName]
+              replacements: [Object.values(req.body)[i], req.body.Name]
             }
           );
         }
@@ -75,11 +73,9 @@ module.exports = function(app) {
     if (Object.keys(req.body).length > 4) {
       for (let i = 7; i < Object.keys(req.body).length; i++) {
         sequelize.query(
-          "UPDATE Items SET " +
-            Object.keys(req.body)[i] +
-            "=? WHERE itemName=?;",
+          "UPDATE Items SET " + Object.keys(req.body)[i] + "=? WHERE Name=?;",
           {
-            replacements: [Object.values(req.body)[i], req.body.itemName]
+            replacements: [Object.values(req.body)[i], req.body.Name]
           }
         );
       }

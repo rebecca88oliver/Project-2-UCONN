@@ -6,9 +6,9 @@ const profits = [];
 $.get("/api/all", data => {
   if (data.length !== 0) {
     for (let i = 0; i < data.length; i++) {
-      botLabel2[i] = data[i].itemName;
-      costs[i] = data[i].baseCost;
-      prices[i] = data[i].retailPrice;
+      botLabel2[i] = data[i].Name;
+      costs[i] = data[i].Wholesale;
+      prices[i] = data[i].Retail;
       profits[i] = parseInt(prices[i]) - parseInt(costs[i]);
     }
   }

@@ -7,10 +7,10 @@ const Sequelize = require("sequelize");
 //////////////////////////////////////////////
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define("Item", {
-    itemName: DataTypes.STRING,
-    itemQuantity: DataTypes.INTEGER,
-    baseCost: DataTypes.INTEGER,
-    retailPrice: DataTypes.INTEGER
+    Name: DataTypes.STRING,
+    Quantity: DataTypes.INTEGER,
+    Wholesale: DataTypes.INTEGER,
+    Retail: DataTypes.INTEGER
   });
 
   return Item;
