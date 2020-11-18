@@ -21,8 +21,8 @@ module.exports = function(app) {
     res.render("addCategory");
   });
 
-  app.get("/editItem", (req, res) => {
-    res.render("editItem");
+  app.get("/editItem/:id", (req, res) => {
+    res.render("editItem", { id: req.params.id });
   });
 
   app.get("/editCategory", (req, res) => {

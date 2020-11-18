@@ -10,13 +10,14 @@ $.get("/api/cat", data => {
   }
 });
 $.get("/api/all", data => {
+  console.log(data);
   if (data.length !== 0) {
     const row = $("<tbody>");
     for (let i = 0; i < data.length; i++) {
       row.append("<tr id='" + data[i].id + "'>");
-      Object.values(data[i]).forEach(val => {
-        row.append("<td>" + val + "</td>");
-      });
+      for (const [key, value] of Object.entries(data[i])) {
+        row.append("<td>" + value + "</td>");
+      }
       row.append(
         "<td style='display: block; margin: auto;'><button type='button' class='edit btn btn-light'>Edit</button></td></tr>"
       );

@@ -12,14 +12,16 @@ const queryInterface = sequelize.getQueryInterface();
 module.exports = function(app) {
   // Get all items
   app.get("/api/all", (req, res) => {
-    db.Item.findAll({}).then(results => {
-      res.json(results);
+    sequelize.query("SELECT * FROM Items;").then(results => {
+      res.json(results[0]);
     });
   });
 
   app.get("/api/cat", (req, res) => {
     sequelize
-      .query("select *from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='items'")
+      .query(
+        "select *from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='items';"
+      )
       .then(results => {
         const columns = [];
         results[0].forEach(element => columns.push(element.COLUMN_NAME));
@@ -29,13 +31,15 @@ module.exports = function(app) {
 
   // Search for Specific item (or all items) then provides JSON
   app.get("/api/:item", (req, res) => {
-    db.Item.findAll({
-      where: {
-        itemName: req.params.itemName
-      }
-    }).then(results => {
-      res.json(results);
-    });
+    console.log(req.params.item);
+    sequelize
+      .query("SELECT * FROM Items WHERE id= (:id);", {
+        replacements: { id: req.params.item },
+        type: sequelize.QueryTypes.SELECT
+      })
+      .then(results => {
+        res.json(results);
+      });
   });
 
   // Add a item
@@ -43,7 +47,20 @@ module.exports = function(app) {
     console.log("Item Data:");
     console.log(req.body);
     db.Item.create(req.body).then(results => {
-      res.json(results);
+      if (Object.keys(req.body).length > 4) {
+        for (let i = 4; i < Object.keys(req.body).length; i++) {
+          sequelize.query(
+            "UPDATE Items SET " +
+              Object.keys(req.body)[i] +
+              "=? WHERE itemName=?;",
+            {
+              replacements: [Object.values(req.body)[i], req.body.itemName]
+            }
+          );
+        }
+      } else {
+        res.json(results);
+      }
     });
   });
 

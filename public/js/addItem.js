@@ -29,12 +29,18 @@ $("#addItem").on("click", event => {
   event.preventDefault();
   const newItem = {};
   // Make an array of the input values
-  for (let i = 1; i < categories.length - 2; i++) {
-    const key = categories[i];
-    const value = $(".category" + i)
-      .val()
-      .trim();
-    newItem[key] = value;
+  for (let i = 1; i < categories.length; i++) {
+    if (
+      categories[i] !== "id" &&
+      categories[i] !== "createdAt" &&
+      categories[i] !== "updatedAt"
+    ) {
+      const key = categories[i];
+      const value = $(".category" + i)
+        .val()
+        .trim();
+      newItem[key] = value;
+    }
   }
   console.log(newItem);
   // Send an AJAX POST-request with jQuery
