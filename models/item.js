@@ -10,10 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     itemName: DataTypes.STRING,
     baseCost: DataTypes.INTEGER,
     retailPrice: DataTypes.INTEGER,
-    itemQuantity: DataTypes.INTEGER,
-    itemDescription: DataTypes.STRING,
-    needsRestock: DataTypes.BOOLEAN,
-    retailProfit: DataTypes.INTEGER
+    itemQuantity: DataTypes.INTEGER
   });
 
   return Item;

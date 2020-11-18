@@ -26,6 +26,4 @@ $.get("/api/all", data => {
   }
 });
 
-$("#addItem").on("click", event => {
-    
-});
+$("#editItem").on("click", event => {});

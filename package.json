@@ -22,8 +22,9 @@
     "mysql": "^2.18.1",
     "mysql2": "^1.7.0",
     "sequelize": "^5.22.3",
-    "inquirer": "7.3.3",
-    "express-handlebars": "5.2.0"
+    "inquirer": "^7.3.3",
+    "express-handlebars": "^5.2.0",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

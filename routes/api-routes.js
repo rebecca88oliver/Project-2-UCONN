@@ -1,7 +1,11 @@
 // Dependencies
 // =============================================================
 const db = require("../models");
-const { Sequelize } = require("../models/index.js");
+const { Sequelize, DataTypes } = require("sequelize");
+const sequelize = new Sequelize("custom_db", "root", "M4ssms3ff3ct!", {
+  dialect: "mysql"
+});
+const queryInterface = sequelize.getQueryInterface();
 
 // Routes
 // =============================================================
@@ -14,7 +18,13 @@ module.exports = function(app) {
   });
 
   app.get("/api/cat", (req, res) => {
-    res.json(Object.keys(db.Item.rawAttributes));
+    sequelize
+      .query("select *from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='items'")
+      .then(results => {
+        const columns = [];
+        results[0].forEach(element => columns.push(element.COLUMN_NAME));
+        res.json(columns);
+      });
   });
 
   // Search for Specific item (or all items) then provides JSON
@@ -59,17 +69,21 @@ module.exports = function(app) {
 
   app.post("/api/newCat", (req, res) => {
     console.log("New Category:");
-    console.log(req.body);
+    console.log(Object.keys(req.body)[0]);
 
-    db.Item.addColumn("items", req.body, Sequelize.VARCHAR);
+    queryInterface.addColumn("items", Object.keys(req.body)[0], {
+      type: DataTypes.STRING
+    });
+    db.sequelize.sync();
   });
 
   app.post("/api/delCat", (req, res) => {
     console.log("Deleted Category:");
-    console.log(req.body);
+    console.log(Object.keys(req.body)[0]);
 
-    db.Item.removeColumn("items", req.body);
+    queryInterface.removeColumn("items", Object.keys(req.body)[0]);
   });
+
   app.post("/api/editCat", (req, res) => {
     console.log("Category:");
     console.log(req.body);
