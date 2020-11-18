@@ -64,14 +64,28 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/edit", (req, res) => {
+  app.put("/api/edit", (req, res) => {
     console.log("item Data:");
     console.log(req.body);
-    db.Item.update(req.body[1], {
+    db.Item.update(req.body, {
       where: {
-        id: req.body[0].id
+        id: req.body.id
       }
     });
+    if (Object.keys(req.body).length > 4) {
+      for (let i = 7; i < Object.keys(req.body).length; i++) {
+        sequelize.query(
+          "UPDATE Items SET " +
+            Object.keys(req.body)[i] +
+            "=? WHERE itemName=?;",
+          {
+            replacements: [Object.values(req.body)[i], req.body.itemName]
+          }
+        );
+      }
+    } else {
+      res.json(results);
+    }
   });
 
   app.post("/api/delete", (req, res) => {

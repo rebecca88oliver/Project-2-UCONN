@@ -19,12 +19,17 @@ $.get("/api/all", data => {
         row.append("<td>" + value + "</td>");
       }
       row.append(
-        "<td style='display: block; margin: auto;'><button type='button' class='edit btn btn-light'>Edit</button></td></tr>"
+        "<td style='display: block; margin: auto;'><button type='button' class='edit btn btn-light' id='" +
+          data[i].id +
+          "'>Edit</button></td></tr>"
       );
     }
     row.append("</tbody>");
     $("#fullInventory").append(row);
   }
-});
 
-$("#editItem").on("click", event => {});
+  $(".edit").on("click", event => {
+    data = { id: event.target.id };
+    window.location.assign("/editItem/" + data.id);
+  });
+});
