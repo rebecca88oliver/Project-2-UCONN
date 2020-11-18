@@ -1,23 +1,29 @@
-// Require mysql
-var mysql = require("mysql");
+// Dependencies
+const Sequelize = require("sequelize");
+const express = require("express");
+const app = express();
+const db = require("./models");
+const exphbs = require("express-handlebars");
 
-// Set up our connection information
-var connection = mysql.createConnection({
-  port: 3306,
-  host: "localhost",
-  user: "root",
-  password: "p0w3r",
-  database: "custom_db"
+// Creating express app and configuring middleware needed for authentication
+const PORT = process.env.PORT || 8080;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
+// configure view template engine
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Requiring our routes
+require("./routes/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
+
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(
+      "==> :earth_americas:  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT
+    );
+  });
 });
-
-// Connect to the database
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + connection.threadId);
-});
-
-// Export connection
-module.exports = connection;

@@ -1,4 +1,5 @@
-const botLabel2 = [];
+const botLabel = [];
+const values = [];
 const costs = [];
 const prices = [];
 const profits = [];
@@ -6,17 +7,46 @@ const profits = [];
 $.get("/api/all", data => {
   if (data.length !== 0) {
     for (let i = 0; i < data.length; i++) {
-      botLabel2[i] = data[i].Name;
+      botLabel[i] = data[i].Name;
+      values.push(data[i].Quantity);
       costs[i] = data[i].Wholesale;
       prices[i] = data[i].Retail;
       profits[i] = parseInt(prices[i]) - parseInt(costs[i]);
     }
   }
-
-  console.log(profits);
+  console.log(values);
   const color = Chart.helpers.color;
+  const barChartData = {
+    labels: botLabel,
+    datasets: [
+      {
+        backgroundColor: color(window.chartColors.black)
+          .alpha(0.5)
+          .rgbString(),
+        borderColor: window.chartColors.black,
+        borderWidth: 1,
+        data: values
+      }
+    ]
+  };
+  const ctx = document.getElementById("inventoryChart").getContext("2d");
+  window.inventoryChart = new Chart(ctx, {
+    type: "bar",
+    data: barChartData,
+    options: {
+      responsive: true,
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Inventory Stock"
+      }
+    }
+  });
+
   const barChartData2 = {
-    labels: botLabel2,
+    labels: botLabel,
     datasets: [
       {
         label: "Wholesale Cost",
@@ -25,7 +55,7 @@ $.get("/api/all", data => {
           .rgbString(),
         borderColor: window.chartColors.red,
         borderWidth: 1,
-        data: Object.values(costs)
+        data: costs
       },
       {
         label: "Retail Price",
@@ -34,7 +64,7 @@ $.get("/api/all", data => {
           .rgbString(),
         borderColor: window.chartColors.blue,
         borderWidth: 1,
-        data: Object.values(prices)
+        data: prices
       },
       {
         label: "Profit",
@@ -43,20 +73,17 @@ $.get("/api/all", data => {
           .rgbString(),
         borderColor: window.chartColors.green,
         borderWidth: 1,
-        data: Object.values(profits)
+        data: profits
       }
     ]
   };
 
-  const ctx = document.getElementById("profitChart").getContext("2d");
-  window.profitChart = new Chart(ctx, {
+  const ctx2 = document.getElementById("profitChart").getContext("2d");
+  window.profitChart = new Chart(ctx2, {
     type: "bar",
     data: barChartData2,
     options: {
       responsive: true,
-      legend: {
-        position: top
-      },
       title: {
         display: false
       },
