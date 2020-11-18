@@ -54,7 +54,7 @@ window.chartColors = {
   }
 
   Samples.utils = {
-//     // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+    // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
     srand: function(seed) {
       this._seed = seed;
     },
