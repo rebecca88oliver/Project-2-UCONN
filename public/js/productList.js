@@ -6,7 +6,7 @@ $.get("/api/all", data => {
         "<a class='list-group-item list-group-item-action editItem' id='" +
           data[i].id +
           "'>" +
-          data[i].itemName +
+          data[i].Name +
           "</a>"
       );
     }

@@ -29,7 +29,7 @@ $.get("/api/cat", data => {
       // On success, run the following code
       .then(
         //display new category
-        location.reload()
+        window.location.assign("/fullInventory")
       );
 
     // Empty each input box by replacing the value with an empty string
@@ -46,5 +46,5 @@ $(".addCategory").on("click", event => {
   // Send an AJAX POST-request with jQuery
   $.post("/api/newCat", newCategory)
     // On success, run the following code
-    .then(location.reload());
+    .then(window.location.reload());
 });

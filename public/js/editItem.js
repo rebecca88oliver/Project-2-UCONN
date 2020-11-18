@@ -17,7 +17,7 @@ $("#updateItem").on("click", event => {
     url: "/api/edit",
     data: newItem
     // On success, run the following code
-  }).then(window.location.reload());
+  }).then(window.location.assign("/fullInventory"));
 });
 
 $("#deleteItem").on("click", event => {
@@ -25,7 +25,7 @@ $("#deleteItem").on("click", event => {
   // Send an AJAX POST-request with jQuery
   $.post("/api/delete", oldItem)
     // On success, run the following code
-    .then(window.location.assign("/"));
+    .then(window.location.assign("/fullInventory"));
 });
 
 // When the form loads, grab our categories and item values
