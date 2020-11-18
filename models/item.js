@@ -8,9 +8,9 @@ const Sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define("Item", {
     itemName: DataTypes.STRING,
+    itemQuantity: DataTypes.INTEGER,
     baseCost: DataTypes.INTEGER,
-    retailPrice: DataTypes.INTEGER,
-    itemQuantity: DataTypes.INTEGER
+    retailPrice: DataTypes.INTEGER
   });
 
   return Item;

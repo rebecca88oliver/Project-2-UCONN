@@ -74,7 +74,6 @@ module.exports = function(app) {
     queryInterface.addColumn("items", Object.keys(req.body)[0], {
       type: DataTypes.STRING
     });
-    db.sequelize.sync();
   });
 
   app.post("/api/delCat", (req, res) => {
