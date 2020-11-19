@@ -13,7 +13,6 @@ $.get("/api/all", data => {
     }
   }
 
-  console.log(profits);
   const color = Chart.helpers.color;
   const barChartData2 = {
     labels: botLabel2,

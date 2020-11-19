@@ -1,7 +1,6 @@
 let categories;
 // When the page loads, grab all of our categories
 $.get("/api/cat", data => {
-  console.log(data);
   categories = data;
   if (data.length !== 0) {
     for (let i = 0; i < data.length; i++) {
@@ -42,7 +41,6 @@ $("#addItem").on("click", event => {
       newItem[key] = value;
     }
   }
-  console.log(newItem);
   // Send an AJAX POST-request with jQuery
   $.post("/api/new", newItem)
     // On success, run the following code

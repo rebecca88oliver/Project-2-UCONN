@@ -1,7 +1,6 @@
 let categories;
 // When the page loads, grab all of our categories
 $.get("/api/cat", data => {
-  console.log(data);
   categories = data;
   if (data.length !== 0) {
     for (let i = 7; i < data.length; i++) {
@@ -22,8 +21,6 @@ $.get("/api/cat", data => {
     // Make a newChirp object
     const currCategory = categories[event.target.parentElement.id].trim();
 
-    console.log(categories[event.target.parentElement.id]);
-
     // Send an AJAX POST-request with jQuery
     $.post("/api/delCat", currCategory)
       // On success, run the following code
@@ -40,11 +37,30 @@ $(".addCategory").on("click", event => {
   event.preventDefault();
   const newCategory = $(".newCategory")
     .val()
-    .trim();
+    .trim()
+    .split(" ")
+    .join("");
   // Make an array of the input values
-  console.log(newCategory);
   // Send an AJAX POST-request with jQuery
   $.post("/api/newCat", newCategory)
     // On success, run the following code
     .then(window.location.reload());
+});
+$("#editCategory").on("click", event => {
+  event.preventDefault();
+
+  for (let i = 7; i < categories.length; i++) {
+    if (categories[i] !== $(".category" + i).val()) {
+      const newCategory = $(".category" + i)
+        .val()
+        .trim()
+        .split(" ")
+        .join("");
+      editObj = {
+        newCategory: newCategory,
+        oldCategory: categories[i]
+      };
+      $.post("/api/editCat", editObj).then(window.location.reload());
+    }
+  }
 });

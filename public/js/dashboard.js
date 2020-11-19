@@ -1,5 +1,4 @@
 $.get("/api/all", data => {
-  console.log(data);
   if (data.length !== 0) {
     for (let i = 0; i < data.length; i++) {
       if (data[i].Quantity < 10) {

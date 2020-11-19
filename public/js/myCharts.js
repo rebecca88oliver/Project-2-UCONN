@@ -14,7 +14,6 @@ $.get("/api/all", data => {
       profits[i] = parseInt(prices[i]) - parseInt(costs[i]);
     }
   }
-  console.log(values);
   const color = Chart.helpers.color;
   const barChartData = {
     labels: botLabel,
@@ -41,6 +40,15 @@ $.get("/api/all", data => {
       title: {
         display: true,
         text: "Inventory Stock"
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
       }
     }
   });
