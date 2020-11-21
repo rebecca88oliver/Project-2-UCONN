@@ -6,12 +6,10 @@ const oldItem = {
   id: currid
 };
 let categories;
-console.log(oldItem);
 const newItem = {};
 
 $("#updateItem").on("click", event => {
   event.preventDefault();
-  console.log(newItem);
   $.ajax({
     method: "PUT",
     url: "/api/edit",
@@ -54,7 +52,6 @@ $.get("/api/" + oldItem.id, oldItem, data => {
         .val()
         .trim();
       newItem[key] = value;
-      console.log(newItem);
     }
   });
 });

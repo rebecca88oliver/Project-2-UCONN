@@ -1,5 +1,4 @@
 $.get("/api/cat", data => {
-  console.log(data);
   if (data.length !== 0) {
     const row = $("<thead><tr>");
     for (let i = 0; i < data.length; i++) {
@@ -10,7 +9,6 @@ $.get("/api/cat", data => {
   }
 });
 $.get("/api/all", data => {
-  console.log(data);
   if (data.length !== 0) {
     const row = $("<tbody>");
     for (let i = 0; i < data.length; i++) {

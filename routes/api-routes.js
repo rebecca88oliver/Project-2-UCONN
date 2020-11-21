@@ -114,6 +114,10 @@ module.exports = function(app) {
     console.log("Category:");
     console.log(req.body);
 
-    db.Item.renameColumn("items", req.body[0], req.body[1]);
+    queryInterface.renameColumn(
+      "items",
+      req.body.oldCategory,
+      req.body.newCategory
+    );
   });
 };
