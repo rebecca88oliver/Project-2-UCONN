@@ -2,9 +2,14 @@
 // =============================================================
 const db = require("../models");
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("custom_db", "root", "M4ssms3ff3ct!", {
-  dialect: "mysql"
-});
+const sequelize = new Sequelize(
+  "jgf3z1e4t8t019g4",
+  "wangi653tuug5ye8",
+  "mud486bhder54swo!",
+  {
+    dialect: "mysql"
+  }
+);
 const queryInterface = sequelize.getQueryInterface();
 
 // Routes
