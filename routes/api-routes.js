@@ -3,7 +3,8 @@
 const db = require("../models");
 const { Sequelize, DataTypes } = require("sequelize");
 let sequelize;
-const config = require("../config/config.json");
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.json")[env];
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
