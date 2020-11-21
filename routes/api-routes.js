@@ -2,14 +2,17 @@
 // =============================================================
 const db = require("../models");
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize(
-  "jgf3z1e4t8t019g4",
-  "wangi653tuug5ye8",
-  "mud486bhder54swo",
-  {
+let sequelize;
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.json")[env];
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, {
     dialect: "mysql"
-  }
-);
+  });
+}
+
 const queryInterface = sequelize.getQueryInterface();
 
 // Routes
